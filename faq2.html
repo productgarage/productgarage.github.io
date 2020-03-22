@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>BearPairs</title>
+		<!-- add bootstrap css file -->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<link rel="shortcut icon" href="">
+
+	</head>
+	<body onLoad="checkAuth();">
+		<!-- navbar -->
+		<nav class="navbar navbar-expand-lg fixed-top ">
+			<a class="navbar-brand" href="./homepage.html">
+				<img src="/images/start_logo.png" width="40" height="40" alt="">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<a class="navbar-brand" href="./homepage.html">
+				<ul class="navbar-nav mr-4">
+					<li class="nav-item">
+						<div class="start">
+							<button class="button4" id="demo" onclick="window.location.href = 'https://nehana.github.io/login.html';"></button>
+							<script>
+							var countDownDate = new Date("Feb 10, 2020 23:59:59").getTime();
+							var x = setInterval(function() {
+							var now = new Date().getTime();
+							var distance = countDownDate - now;
+							var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+							if (days < 10) {
+								days = "0" + days;
+							}
+							var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+							if (hours < 10) {
+								hours = "0" + hours;
+							}
+							var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+							if (minutes < 10) {
+								minutes = "0" + minutes;
+							}
+							var seconds = Math.floor((distance % (1000 * 60)) / (1000));
+							if (seconds < 10) {
+								seconds = "0" + seconds;
+							}
+							document.getElementById("demo").innerHTML = days + " : " + hours + " : "
+							+ minutes + " : " + seconds;
+							if (distance < 0) {
+								clearInterval(x);
+								document.getElementById("demo").innerHTML = "Happy Valentine's Day!!";
+							}
+							}, 1000);
+							</script>
+						</div>
+					</li>
+				</ul>
+			</a>
+			<div class="collapse navbar-collapse " id="navbarSupportedContent">
+				<ul class="navbar-nav mr-4">
+						<li class="nav-item">
+							<a class="nav-link" href="./about2.html">ABOUT</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="./team.html">TEAM</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="./faq2.html">FAQ</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="login" href="./login.html">LOGIN</a>
+						</li>
+				</ul>
+				<script>
+					const checkAuth = async() => {
+						console.log(sessionStorage.email);
+						if(sessionStorage.email == undefined) {
+							console.log("user not logged in");
+							var element = document.getElementById("login");
+							element.innerHTML = "LOGIN";
+							element.setAttribute('href', './login.html');
+							return;
+						} else {
+							console.log("user logged in");
+							var element = document.getElementById("login");
+							element.innerHTML = "LOG OUT";
+							element.setAttribute('href', './logoutConfirmation.html');
+							return;
+						}
+					}
+					function signOut() {
+						gapi.auth2.getAuthInstance().signOut().then(function() {
+							console.log('user signed out');
+							var element = document.getElementById("login");
+							element.innerHTML = "LOGIN";
+							element.setAttribute('href', './login.html');
+							sessionStorage.clear();
+							window.location.replace("https://nehanam.github.io/logoutConfirmation.html");
+							return;
+						})
+					}
+				</script>
+			</div>
+		</nav>
+
+
+
+
+    <div class="d">
+      <h3> <a data-value="general" href="#general">GENERAL</a>
+       |
+      <a data-value="algorithm" href="#algorithm">ALGORITHM</a>
+       |
+      <a data-value="results" href="#results">RESULTS</a>
+      </h3>
+
+      <div class="general" id="general">
+      <h1> General </h1>
+			<h2><strong>I’m having a technical error!!</strong></h2>
+      <p>Worry not - we’re here to help! Please email us at <a href="mailto:roomie.contact@gmail.com?Subject=Roomie%20Error" target="_top">roomie.contact@gmail.com</a> to report errors, and we will get back to you as soon as possible.</p>
+      <h2>The gender and/or sexuality I identify with is not here!</h2>
+      <p>First and foremost, we apologize for the lack of representation in the survey choices. We strive to be inclusive, and are constantly looking for feedback and to improve, which you can email us <a href="mailto:roomie.contact@gmail.com?Subject=Add%20to%20sexuality%20survey%20options" target="_top">here</a>.
+			</p>
+			<h2>I'm an alum, so I no longer have a berkeley email - can I still participate? </h2>
+			<p>This year, we are not allowing alumni to participate. Please check back next year for updates! </p>
+			<h2>I’m having issues on mobile, or opening the website through Messenger/Facebook.</h2>
+			<p>Sorry - please try using your computer, or just typing “roomie.me” into the browser on your phone. In the case that you still encounter errors, please contact us <a href="mailto:roomie.contact@gmail.com?Subject=BearPairs%20Error" target="_top">here</a>.</p>
+			<h2>I want to change some preferences or edit my survey responses. What do I do?</h2>
+			<p>Click the survey button in the navigation bar, and easily edit your responses.</p>
+      </div>
+      <div class="algorithm" id="algorithm">
+      <h1> Algorithm </h1>
+      <h2>What algorithm are you using? </h2>
+      <p> We have carefully designed an algorithm to take into account your preferences, personalities, and interests to calculate roommate compatibility.</p>
+      <h2>How accurate are the results?</h2>
+      <p>This is our launching year, so if you <a href="https://nehana.github.io/login.html">take the survey</a> (please do) you’ll help us find out!</p>
+			<h2>I don’t like my matches. Can I get new ones?</h2>
+			<p>In one word: no. But you can explore and filter profiles across your school!  We want to support you and help you find the best roommate possible. <a href="https://nehana.github.io/about2.html#perks">here</a>! Otherwise, better luck next year.
+</h2>
+      </div>
+      <div class="results" id="results">
+      <h1> Results </h1>
+      <h2>What will I know about my matches?</h2>
+      <p>You will get basic info, social profiles they chose to share, a plethora of fun facts, and dorm and living style preferences.
+</p>
+      <h2>What do I do after I receive my matches?</h2>
+      <p>Reach out to them via the social media profiles they have listed!  We're confident that you can find your dream roommate.</p>
+			<h2>What do you do with my results?</h2>
+			<p>We anonymize your responses before running the algorithm; the only thing those on the team come into contact with, that are attached to your specific account, are your final results. We will never share your results with others outside of our team.</p>
+      </div>
+		</div>

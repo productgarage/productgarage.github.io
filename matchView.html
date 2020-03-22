@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Matches</title>
+  <!-- add bootstrap css file -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+
+</head>
+
+<body id="get-big" onload="matchLoad()">
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top ">
+		<a class="navbar-brand" href="./homepage.html">
+			<img src="/images/start_logo.png" width="40" height="40" alt="">
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse " id="navbarSupportedContent">
+			<ul class="navbar-nav mr-4">
+					<li class="nav-item">
+						<a class="nav-link" href="./about2.html">ABOUT</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./team.html">TEAM</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./faq2.html">FAQ</a>
+					</li>
+          <li class="nav-item">
+            <a class="nav-link" href="./matches.html">MATCHES</a>
+          </li>
+					<li class="nav-item">
+							<a class="nav-link" href="./login.html">LOGIN</a>
+				</li>
+			</ul>
+
+		</div>
+		</nav>
+        <div class="container" >
+            <div class = "matchview">
+                <div id="match-picture" class="match">  </div>
+                <h2 id="match-name"></h2>
+                <h5 id="match-email"></h5>
+                <h5 id="match-phone"></h5>
+                <h5 id="match-fb"></h5>
+                <h5 id="match-insta"></h5>
+                <h5 id="match-snap"></h5>
+                <br>
+                <h5 id="match-age"></h5>
+                <h5 id="match-major"></h5>
+                <h5 id="match-music"></h5>
+                <h5 id="match-study"></h5>
+                <h5 id="match-date"></h5>
+                <h5 id="match-memes"></h5>
+                <h5 id="match-gobears"></h5>
+                <br>
+                <button class="button" onclick="window.location.href = 'https://nehana.github.io/matches.html';">BACK TO MATCHES</button>
+            </div>
+        </div>
+        <style>
+            .matchview {
+                margin-top: 10%;
+                color:#FFFFFF ;
+                text-align: center;
+            }
+            .matchview h2 {
+                color:#FFFFFF ;
+                text-align: center;
+                font-size: 45px;
+                margin-left: auto;
+                margin-right: auto;
+                width: 80%
+            }
+            .matchview h5 {
+                color:#FFFFFF ;
+                text-align: center;
+                font-size: 22px;
+                margin-left: auto;
+                margin-right: auto;
+                width: 80%
+            }
+            .matchview h6 {
+                color:#FFFFFF ;
+                text-align: center;
+                font-weight: 500;
+                font-size: 17px;
+                margin-left: auto;
+                margin-right: auto;
+                width: 80%
+            }
+            .matchview match {
+                display: inline-block;
+                width: 250px;
+                height: 250px;
+                border: 5px solid #FFD972;
+                background-position: center center;
+                background-size: cover;
+                border-radius: 50%;
+                animation: shadow-pulse 1s infinite;
+            }
+        </style>
+    </div>
+    <br>
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+          apiKey: "AIzaSyCvpEisytGcXdAqjyxrWiDrAvqy86Bi6Dk",
+          authDomain: "bearp-493dc.firebaseapp.com",
+          databaseURL: "https://bearp-493dc.firebaseio.com",
+          projectId: "bearp-493dc",
+          storageBucket: "bearp-493dc.appspot.com",
+          messagingSenderId: "714702346867"
+      }
+      firebase.initializeApp(config);
+    </script>
+    <script>
+      const matchLoad = async() => {
+        const userEmail = sessionStorage.email;
+        const db = firebase.firestore();
+            const matchPic = document.querySelector("#match-picture");
+            const matchName = document.querySelector("#match-name");
+            const matchTweet = document.querySelector("#match-tweet");
+            var x = sessionStorage.matchView;
+            var name = sessionStorage.getItem("matchName");
+            var pic = sessionStorage.getItem("matchPic");
+            var phone = sessionStorage.getItem("matchPhone");
+            var email = sessionStorage.getItem("matchEmail");
+            var fb = sessionStorage.getItem("matchFB");
+            var snap = sessionStorage.getItem("matchSnap");
+            var insta = sessionStorage.getItem("matchInsta");
+            var date = sessionStorage.getItem("matchDate");
+            var age = sessionStorage.getItem("matchYear");
+            var major = sessionStorage.getItem("matchMajor");
+            var music = sessionStorage.getItem("matchMusic");
+            var study = sessionStorage.getItem("matchStudy");
+            var memes = sessionStorage.getItem("matchMemes");
+            var gobears = sessionStorage.getItem("matchBears");
+
+            if(pic == "na") {
+                pic = "https://api.typeform.com/responses/files/3de09c46fbc7e6fba7966fe3210e1158f6cec2d84fc2e783c588ffdc0a803df0/86263814_498209070886531_4200548856678580224_n.png";
+            }
+            document.getElementById("match-name").textContent = name;
+            document.getElementById("match-picture").src = pic;
+            document.getElementById("match-picture").style = "background-image: url('" + pic + "');";
+            document.getElementById("match-date").textContent = "Ideal First Date: " + date;
+            document.getElementById("match-age").textContent = "Year: " + age;
+            document.getElementById("match-major").textContent = "Major: " + major;
+            document.getElementById("match-music").textContent = "Music: " + music;
+            document.getElementById("match-study").textContent = "I wouldn't study at: " + study;
+            document.getElementById("match-memes").textContent = "Every day I browse memes for: " + memes;
+            if (gobears == "The University of California, Berkeley is a public research university in Berkeley, California. Founded in 1868, it is the flagship campus and the oldest of the ten campuses of the University of California.") {
+                gobears = "The University of ...";
+            }
+            document.getElementById("match-gobears").textContent = "Go: " + gobears;
+
+
+            if (email != "na") {
+                document.getElementById("match-email").textContent = "Email: " + email;
+            } else {
+                var element = document.getElementById("match-email");
+                element.parentNode.removeChild(element);
+            }
+            if (fb != "na") {
+                document.getElementById("match-fb").textContent = "Facebook: " + fb;
+            } else {
+                var element = document.getElementById("match-fb");
+                element.parentNode.removeChild(element);
+            }
+            if (phone != "na") {
+                document.getElementById("match-phone").textContent = "Phone: " + phone;
+            } else {
+                var element = document.getElementById("match-phone");
+                element.parentNode.removeChild(element);
+            }
+            if (snap != "na") {
+                document.getElementById("match-snap").textContent = "Snap: " + snap;
+            } else {
+                var element = document.getElementById("match-snap");
+                element.parentNode.removeChild(element);
+            }
+            if (insta != "na") {
+                document.getElementById("match-insta").textContent = "Instagram: " + insta;
+            } else {
+                var element = document.getElementById("match-insta");
+                element.parentNode.removeChild(element);
+            }
+        };
+    </script>
+</body>
+</html>

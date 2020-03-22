@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Matches</title>
+  <!-- add bootstrap css file -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+
+</head>
+
+<body id="get-big" onload="matchLoad()">
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top ">
+		<a class="navbar-brand" href="./homepage.html">
+			<img src="/images/start_logo.png" width="40" height="40" alt="">
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse " id="navbarSupportedContent">
+			<ul class="navbar-nav mr-4">
+					<li class="nav-item">
+						<a class="nav-link" href="./about2.html">ABOUT</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./team.html">TEAM</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./faq2.html">FAQ</a>
+          </li>
+					<li class="nav-item">
+							<a class="nav-link" href="./login.html">LOGIN</a>
+				</li>
+			</ul>
+
+		</div>
+		</nav>
+    <div class="c">
+      <h1>Your ideal matches</h1>
+      <br>
+      <!-- <h5>Click picture for more info</h5> -->
+      <div class="loader" id="loading-image"></div>
+    </div>
+    <div class="a" >
+          <div id="match-picture-0" class="avatar" onClick="seeMatch0()"></div>
+
+        <div id="match-picture-1" class="avatar" onClick="seeMatch1()">
+            <div id="match-name-1"></div>
+        </div>
+        <div id="match-picture-2" class="avatar" onClick="seeMatch2()">
+            <div id="match-name-2"></div>
+        </div>
+        <br> <br>
+        <div class="c">
+
+        </div>
+        <br>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+          apiKey: "AIzaSyCvpEisytGcXdAqjyxrWiDrAvqy86Bi6Dk",
+          authDomain: "bearp-493dc.firebaseapp.com",
+          databaseURL: "https://bearp-493dc.firebaseio.com",
+          projectId: "bearp-493dc",
+          storageBucket: "bearp-493dc.appspot.com",
+          messagingSenderId: "714702346867"
+      }
+      firebase.initializeApp(config);
+    </script>
+    <script>
+      const matchLoad = async() => {
+        const userEmail = sessionStorage.email;
+        const db = firebase.firestore();
+
+        const users = db.collection('usersFinal');
+            const res = await getMatches();
+            const matchPic = document.querySelector("#picture");
+            const matchName = document.querySelector("#match-name");
+            const matchTweet = document.querySelector("#email");
+            var element = document.getElementById("loading-image");
+            element.parentNode.removeChild(element);
+        };
+
+        const getMatches = async () => {
+            const userEmail = sessionStorage.email;
+            const db = firebase.firestore();
+            var matchEmails;
+            let list=[];
+            var sessionEmail = userEmail;
+            sessionEmail = sessionEmail.toLowerCase();
+            const user = db.collection('userFinalMatches').doc(sessionEmail);
+            user.get().then(function(doc) {
+                if(doc.exists) {
+                    matchProfiles = doc.data().matchProfiles;
+                    for (var i in matchProfiles) {
+                        var id = "match-picture-" + i;
+                        var matchEmail = matchProfiles[i].email;
+                        var matchPic = matchProfiles[i].pic;
+                        if(matchPic == "na") {
+                            matchPic = "https://api.typeform.com/responses/files/3de09c46fbc7e6fba7966fe3210e1158f6cec2d84fc2e783c588ffdc0a803df0/86263814_498209070886531_4200548856678580224_n.png";
+                        }
+                        document.getElementById("match-picture-" + i).src = matchPic;
+                        document.getElementById("match-picture-" + i).style = "background-image: url('" + matchPic + "');";
+                        if (matchProfiles.length == 1) {
+                            var element = document.getElementById("match-picture-2");
+                            element.parentNode.removeChild(element);
+                            element = document.getElementById("match-picture-1");
+                            element.parentNode.removeChild(element);
+                        } else if (matchProfiles.length == 2) {
+                            var element = document.getElementById("match-picture-2");
+                            element.parentNode.removeChild(element);
+                        }
+                    }
+                    } else {
+                        console.log("Something went wrong :(")
+                    }
+            })
+            return list;
+        }
+
+        const seeMatch0 = async () => {
+          sessionStorage.matchView = 0;
+          sessionStorage.matchName = matchProfiles[0].name;
+          sessionStorage.matchPic = matchProfiles[0].pic;
+          sessionStorage.matchEmail = matchProfiles[0].email;
+          sessionStorage.matchFB = matchProfiles[0].fb;
+          sessionStorage.matchSnap = matchProfiles[0].snap;
+          sessionStorage.matchInsta = matchProfiles[0].insta;
+          sessionStorage.matchPhone = matchProfiles[0].phone;
+          sessionStorage.matchDate = matchProfiles[0].date;
+          sessionStorage.matchYear = matchProfiles[0].age;
+          sessionStorage.matchMajor = matchProfiles[0].major;
+          sessionStorage.matchMusic = matchProfiles[0].music;
+          sessionStorage.matchMemes = matchProfiles[0].memes;
+          sessionStorage.matchStudy = matchProfiles[0].study;
+          sessionStorage.matchBears = matchProfiles[0].gobears;
+
+          window.location.replace("http://bearpairs.me/matchView.html");
+        }
+        const seeMatch1 = async () => {
+          sessionStorage.matchView = 1;
+          sessionStorage.matchName = matchProfiles[1].name;
+          sessionStorage.matchPic = matchProfiles[1].pic;
+          sessionStorage.matchEmail = matchProfiles[1].email;
+          sessionStorage.matchFB = matchProfiles[1].fb;
+          sessionStorage.matchSnap = matchProfiles[1].snap;
+          sessionStorage.matchInsta = matchProfiles[1].insta;
+          sessionStorage.matchPhone = matchProfiles[1].phone;
+          sessionStorage.matchDate = matchProfiles[1].date;
+          sessionStorage.matchYear = matchProfiles[1].age;
+          sessionStorage.matchMajor = matchProfiles[1].major;
+          sessionStorage.matchMusic = matchProfiles[1].music;
+          sessionStorage.matchMemes = matchProfiles[1].memes;
+          sessionStorage.matchStudy = matchProfiles[1].study;
+          sessionStorage.matchBears = matchProfiles[1].gobears;
+          window.location.replace("http://bearpairs.me/matchView.html");
+        }
+        const seeMatch2 = async () => {
+          sessionStorage.matchView = 2;
+          sessionStorage.matchName = matchProfiles[2].name;
+          sessionStorage.matchPic = matchProfiles[2].pic;
+          sessionStorage.matchEmail = matchProfiles[2].email;
+          sessionStorage.matchFB = matchProfiles[2].fb;
+          sessionStorage.matchSnap = matchProfiles[2].snap;
+          sessionStorage.matchInsta = matchProfiles[2].insta;
+          sessionStorage.matchPhone = matchProfiles[2].phone;
+          sessionStorage.matchDate = matchProfiles[2].date;
+          sessionStorage.matchYear = matchProfiles[2].age;
+          sessionStorage.matchMajor = matchProfiles[2].major;
+          sessionStorage.matchMusic = matchProfiles[2].music;
+          sessionStorage.matchMemes = matchProfiles[2].memes;
+          sessionStorage.matchStudy = matchProfiles[2].study;
+          sessionStorage.matchBears = matchProfiles[2].gobears;
+          window.location.replace("http://bearpairs.me/matchView.html");
+        }
+    </script>
+    <script language="javascript" type="text/javascript">
+</script>
+</body>
+</html>

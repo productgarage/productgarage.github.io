@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>BearPairs</title>
+	 <!-- add bootstrap css file -->
+
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="css/main.css">
+
+</head>
+<body style="background-color:#f9fcff;" onLoad="checkAuth();">
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg fixed-top ">
+	<a class="navbar-brand" href="./homepage.html">
+		<img src="/images/start_logo.png" width="40" height="40" alt="">
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<a class="navbar-brand" href="./homepage.html">
+		<ul class="navbar-nav mr-4">
+			<li class="nav-item">
+				<div class="start">
+					<button class="button4" id="demo" onclick="window.location.href = 'https://nehana.github.io/login.html';"></button>
+					<script>
+					var countDownDate = new Date("Feb 10, 2020 23:59:59").getTime();
+					var x = setInterval(function() {
+					var now = new Date().getTime();
+					var distance = countDownDate - now;
+					var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+					if (days < 10) {
+						days = "0" + days;
+					}
+					var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+					if (hours < 10) {
+						hours = "0" + hours;
+					}
+					var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+					if (minutes < 10) {
+						minutes = "0" + minutes;
+					}
+					var seconds = Math.floor((distance % (1000 * 60)) / (1000));
+					if (seconds < 10) {
+						seconds = "0" + seconds;
+					}
+					document.getElementById("demo").innerHTML = days + " : " + hours + " : "
+					+ minutes + " : " + seconds;
+					if (distance < 0) {
+						clearInterval(x);
+						document.getElementById("demo").innerHTML = "Happy Valentine's Day!!";
+					}
+					}, 1000);
+					</script>
+				</div>
+			</li>
+		</ul>
+	</a>
+	<div class="collapse navbar-collapse " id="navbarSupportedContent">
+		<ul class="navbar-nav mr-4">
+				<li class="nav-item">
+					<a class="nav-link" href="./about2.html">ABOUT</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="./team.html">TEAM</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="./faq2.html">FAQ</a>
+                </li>
+                <li class="nav-item">
+					<a class="nav-link" href="./stats.html">STATS</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="login" href="./login.html">LOGIN</a>
+				</li>
+		</ul>
+		<script>
+			const checkAuth = async() => {
+				console.log(sessionStorage.email);
+				if(sessionStorage.email == undefined) {
+					console.log("user not logged in");
+					var element = document.getElementById("login");
+					element.innerHTML = "LOGIN";
+					element.setAttribute('href', './login.html');
+					return;
+				} else { 
+					console.log("user logged in");
+					var element = document.getElementById("login");
+					element.innerHTML = "LOG OUT";
+					element.setAttribute('href', './logoutConfirmation.html');
+					return;
+				}
+			}
+			function signOut() {
+				gapi.auth2.getAuthInstance().signOut().then(function() {
+					console.log('user signed out');
+					var element = document.getElementById("login");
+					element.innerHTML = "LOGIN";
+					element.setAttribute('href', './login.html');
+					sessionStorage.clear();
+					window.location.replace("https://nehana.github.io/logoutConfirmation.html");
+					return;
+				})
+			}
+		</script>
+	</div>
+</nav>
+
+<div>
+    <style>
+        .statblock {
+            color:#FFFFFF ;
+            margin-top: 75px;
+            text-align: center;
+        }
+
+    </style>
+    <div class="c">
+        <h1 style="color:#67aaf9;">Survey Stats</h1>
+        <br> 
+        <br> 
+        <img src="images/Survey Stats (1).png" alt="Survey stats" style="width:33%">
+    </div>
+    <div class="statblock">
+        <h1 style="color:#67aaf9;">Demographics</h1> 
+    </div>
+    <div class="row">
+    <div class="column">
+        <img src="/images/BP Gender.png" alt="Snow" style="width:100%">
+    </div>
+    <div class="column">
+        <img src="/images/BP Romantic_Platonic.png" alt="Forest" style="width:100%">
+    </div>
+    <div class="column">
+        <img src="/images/BP Years.png" alt="Mountains" style="width:100%">
+    </div>
+        <style>
+            /* Three image containers (use 25% for four, and 50% for two, etc) */
+            .column {
+            float: left;
+            width: 33.33%;
+            padding: 5px;
+            }
+
+            /* Clear floats after image containers */
+            .row::after {
+            content: "";
+            clear: both;
+            display: table;
+            }
+        </style>
+    </div>
+    <div class="statblock">
+        <h1 style="color:#67aaf9;">Perspectives</h1> 
+    </div>
+    <div class="row">
+        <div class="column">
+            <img src="/images/BP Major.png" alt="Snow" style="width:100%">
+        </div>
+        <div class="column">
+            <img src="/images/BP Political Affiliation (1).png" alt="Forest" style="width:100%">
+        </div>
+        <div class="column">
+            <img src="/images/BP Religion.png" alt="Mountains" style="width:100%">
+        </div>
+    <style>
+        /* Three image containers (use 25% for four, and 50% for two, etc) */
+        .column {
+        float: left;
+        width: 33.33%;
+        padding: 5px;
+        }
+
+        /* Clear floats after image containers */
+        .row::after {
+        content: "";
+        clear: both;
+        display: table;
+        }
+    </style>
+    </div>
+    <div class="statblock">
+        <h1 style="color:#67aaf9;">Pastimes</h1> 
+    </div>
+    <div class="row">
+        <div class="column4">
+            <img src="images/BP Meme Time.png" alt="Snow" style="width:100%">
+        </div>
+        <div class="column4">
+            <img src="/images/BP Music Genre (2).png" alt="Forest" style="width:100%">
+        </div>
+        <div class="column4">
+            <img src="/images/BP Parties.png" alt="Mountains" style="width:100%">
+        </div>
+        <div class="column4">
+            <img src="/images/BP Study Place.png" alt="Mountains" style="width:100%">
+        </div>
+        <style>
+        /* Three image containers (use 25% for four, and 50% for two, etc) */
+        .column4 {
+        float: left;
+        width: 25%;
+        padding: 5px;
+        }
+
+        /* Clear floats after image containers */
+        .row::after {
+        content: "";
+        clear: both;
+        display: table;
+        }
+    </style>
+    </div>
+    <div class="statblock">
+        <h1 style="color:#67aaf9;">Love</h1> 
+    </div>
+    <div class="row">
+        <div class="column">
+            <img src="images/BP Kinky.png" alt="Snow" style="width:100%">
+        </div>
+        <div class="column">
+            <img src="/images/BP Love Language.png" alt="Forest" style="width:100%">
+        </div>
+        <div class="column">
+            <img src="/images/BP Past Relationships.png" alt="Mountains" style="width:100%">
+        </div>
+        <style>
+        /* Three image containers (use 25% for four, and 50% for two, etc) */
+        .column {
+        float: left;
+        width: 33.33%;
+        padding: 5px;
+        }
+
+        /* Clear floats after image containers */
+        .row::after {
+        content: "";
+        clear: both;
+        display: table;
+        }
+    </style>
+    </div>
+    <div class="statblock">
+        <h1 style="color:#67aaf9;">Go Bears</h1> 
+        <img src="images/BP Go....png" style="width:33%">
+    </div>
+</div>
+
+
+<!-- add Google Platform Library for Google Sign-In -->
+<script src="https://apis.google.com/js/platform.js"></script>
+<meta name="google-signin-client_id" content="35180848538-cuhdfp0dham997bln0ohbmq679omo6tf.apps.googleusercontent.com.apps.googleusercontent.com">
