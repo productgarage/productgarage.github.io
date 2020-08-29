@@ -114,7 +114,8 @@ div.d {
 }
 div.e {
 	color:#000000 ;
-	margin-top: 150px;
+	/* margin-top: 150px; */
+	margin-top: 100px;
 	text-align: center;
 }
 .avatar {
@@ -579,12 +580,27 @@ div.e h1 {
 }
 
 div.e h3 {
-	color:#A9A9A9;
+	/* color:#A9A9A9;
 	position: relative;
 	top: -60px;
 	text-align: center;
 	font-size: 30px;
-	letter-spacing: 7px;
+	letter-spacing: 7px; */
+	color: #21201f;
+				font-size: 5vmin;
+				line-height: 1;
+				font-weight: bold;
+				letter-spacing: 2px;
+				font-family: 'Poppins', sans-serif;
+				/* text-transform: uppercase; */
+				/* padding-top: 300px; */
+				/* padding-left: 40px; */
+				/* margin:0;
+				padding:0; */
+				display: block;
+				text-align: center;
+				margin-top: 100px;
+				/* padding-left: 100px; */
 }
 
 div.e h4 {
